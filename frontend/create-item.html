@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Item - Playlink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <header>
+        <nav class="container" id="main-nav"></nav>
+    </header>
+
+    <main>
+        <div class="form-container-wrapper">
+            <div class="form-container">
+                <form id="create-item-form" class="form-box active">
+                    <h2 class="form-title">LIST NEW ITEM</h2>
+                    <div class="input-group">
+                        <input type="text" id="item-name" placeholder="Item Name" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="item-description" placeholder="Item Description" rows="6" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="item-price" placeholder="Price (in GC)" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-btn">List My Item</button>
+                    <div id="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/nav.js"></script>
+    <script src="js/create-item.js"></script>
+</body>
+</html>
