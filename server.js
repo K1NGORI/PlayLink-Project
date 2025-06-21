@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const marketplaceRouter = require('./routes/marketplace');
+const marketplaceRouter = require('./routes/marketplaces');
 
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
