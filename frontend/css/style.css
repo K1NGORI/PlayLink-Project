@@ -390,3 +390,14 @@ footer {
     margin-bottom: 10px;
     color: var(--primary-neon);
 }
+.input-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(10, 12, 16, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif; /* A more standard font for long text */
+    font-size: 1em;
+    resize: vertical;
+}
