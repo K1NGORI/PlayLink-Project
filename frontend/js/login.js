@@ -61,33 +61,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-        try {
-            const response = await fetch(`${apiBaseUrl}/users/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+       try {
+    const response = await fetch(`${apiBaseUrl}/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
 
-            const data = await response.json();
+    const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.Error || 'Login failed');
-            }
+    if (!response.ok) {
+        throw new Error(data.Error || 'Login failed');
+    }
 
-            // On successful login, you would typically save the user/token
-            // and redirect to the main page or a dashboard.
-            // For now, we'll just show a success message.
-            formMessage.style.color = 'var(--primary-neon)';
-            formMessage.textContent = `Welcome back, ${data.user.username}!`;
-            
-            // Redirect to homepage after a short delay
-            setTimeout(() => {
-                window.location.href = 'index.html'; // Redirect to the main page
-            }, 2000);
+    // ---- REPLACE THIS SECTION ---- //
+    // Old code just showed a message. New code saves to localStorage and redirects.
+    
+    // Save user data to localStorage
+    localStorage.setItem('playlinkUser', JSON.stringify(data.user));
 
-        } catch (error) {
-            formMessage.style.color = 'var(--secondary-neon)';
-            formMessage.textContent = error.message;
-        }
+    // Redirect to the new dashboard page
+    window.location.href = 'dashboard.html';
+    // ----------------------------- //
+
+} catch (error) {
+    formMessage.style.color = 'var(--secondary-neon)';
+    formMessage.textContent = error.message;
+}
     });
 });
