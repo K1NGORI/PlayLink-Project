@@ -36,6 +36,7 @@ const marketplaceRouter = require('./routes/marketplaces');
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/marketplace', marketplaceRouter);
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
