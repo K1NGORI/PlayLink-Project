@@ -17,39 +17,46 @@
             </nav>
     </header>
 
-    <main>
-        <section id="dashboard" class="container">
-            <div class="dashboard-header">
-                <h2>Welcome, <span id="username-display">User</span>!</h2>
-                <p>This is your personal hub. What will you do next?</p>
-            </div>
+ <main>
+    <section id="account" class="container">
+        <div class="account-header">
+            <h2>Welcome, <span id="username-display">User</span>!</h2>
+            <p>This is your personal hub. Manage your account and track your activity.</p>
+        </div>
 
-            <div class="dashboard-actions">
+        <div class="account-panel">
+            <h3>Quick Actions</h3>
+            <div class="account-actions">
                 <a href="create-post.html" class="action-card">
                     <i class="fa-solid fa-plus-circle"></i>
-                    <h3>Create New Forum Post</h3>
+                    <h4>Create New Forum Post</h4>
                     <p>Share your thoughts with the community.</p>
                 </a>
                 <a href="create-item.html" class="action-card">
                     <i class="fa-solid fa-cart-plus"></i>
-                    <h3>List New Marketplace Item</h3>
+                    <h4>List New Marketplace Item</h4>
                     <p>Sell your gear to other players.</p>
                 </a>
             </div>
-            <div class="dashboard-transactions">
-    <div class="transaction-list">
-        <h3>My Purchases (In Escrow)</h3>
-        <ul id="purchases-list">
-            </ul>
-    </div>
-    <div class="transaction-list">
-        <h3>My Sales (In Escrow)</h3>
-        <ul id="sales-list">
-            </ul>
-    </div>
-</div>
-            </section>
-    </main>
+        </div>
+
+        <div class="account-panel">
+            <h3>Active Transactions</h3>
+            <div class="account-transactions">
+                <div class="transaction-list">
+                    <h4>My Purchases (In Escrow)</h4>
+                    <ul id="purchases-list">
+                        </ul>
+                </div>
+                <div class="transaction-list">
+                    <h4>My Sales (In Escrow)</h4>
+                    <ul id="sales-list">
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
     <script src="js/nav.js"></script>
     <script src="js/account.js"></script>

@@ -359,7 +359,7 @@ footer {
     to { opacity: 1; }
 }
 
-/* --- Account/Dashboard Page Styles --- */
+/* --- Account Page Styles --- */
 #account {
     padding-top: 120px;
 }
@@ -368,14 +368,23 @@ footer {
     text-align: center;
     margin-bottom: 60px;
 }
+.account-header h2 { font-size: 3em; }
+.account-header p { font-size: 1.2em; color: #aaa; }
 
-.account-header h2 {
-    font-size: 3em;
+.account-panel {
+    background: rgba(10, 12, 16, 0.8);
+    padding: 30px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 40px;
 }
 
-.account-header p {
-    font-size: 1.2em;
-    color: #aaa;
+.account-panel > h3 {
+    font-size: 1.8em;
+    color: var(--primary-neon);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .account-actions {
@@ -388,57 +397,52 @@ footer {
 .action-card {
     background: rgba(26, 31, 40, 0.7);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 40px;
+    padding: 30px;
     text-align: center;
     text-decoration: none;
     color: var(--text-color);
-    width: 300px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .action-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 0 20px var(--secondary-neon);
-    color: var(--secondary-neon);
 }
 
-.action-card i {
-    font-size: 4em;
-    margin-bottom: 20px;
-    display: block;
-}
+.action-card i { font-size: 3em; margin-bottom: 20px; display: block; }
+.action-card h4 { font-size: 1.3em; margin-bottom: 10px; color: var(--primary-neon); }
 
-.action-card h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: var(--primary-neon);
-}
 
-/* --- Dashboard Transaction Styles --- */
+/* --- Account Transaction Styles --- */
 .account-transactions {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap; /* This makes it responsive */
     gap: 40px;
 }
-.transaction-list h3 {
-    color: var(--primary-neon);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 15px;
+.transaction-list {
+    flex: 1; /* Each list will take up equal space */
+    min-width: 300px; /* Ensures they don't get too squished */
+}
+.transaction-list h4 {
+    font-size: 1.3em;
+    color: #fff;
     margin-bottom: 20px;
 }
 .transaction-list ul {
     list-style: none;
 }
 .transaction-list li {
-    background-color: rgba(26, 31, 40, 0.7);
+    background-color: rgba(26, 31, 40, 0.9);
     padding: 15px 20px;
     border-radius: 5px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-left: 3px solid var(--secondary-neon);
 }
 .btn-sm {
     padding: 5px 10px;
@@ -567,5 +571,18 @@ a.user-link:hover {
 .item-price-large {
     font-size: 2.5em;
     color: var(--primary-neon);
+    font-weight: bold;
+}
+/* --- Item Status Styles --- */
+.card-footer .status-available {
+    color: var(--primary-neon);
+    font-weight: bold;
+}
+.card-footer .status-in_escrow {
+    color: #ffc107; /* Amber */
+    font-weight: bold;
+}
+.card-footer .status-sold {
+    color: #f44336; /* Red */
     font-weight: bold;
 }
