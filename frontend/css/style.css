@@ -1,5 +1,3 @@
-/* css/style.css */
-
 /* --- Variable and Basic Setup --- */
 :root {
     --dark-blue: #0a0c10;
@@ -100,6 +98,7 @@ nav ul a:not(.btn):hover {
     font-weight: 700;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -123,6 +122,14 @@ nav ul a:not(.btn):hover {
     background-color: var(--secondary-neon);
     color: var(--dark-blue);
     box-shadow: 0 0 20px var(--secondary-neon);
+}
+
+.btn.disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+    animation: none;
 }
 
 /* --- Hero Section --- */
@@ -151,7 +158,7 @@ nav ul a:not(.btn):hover {
 /* --- Main Content Sections --- */
 section {
     padding: 100px 0;
-    animation: fadeInUp 1s ease-out;
+    padding-top: 140px; /* Add padding to avoid content hiding behind fixed header */
 }
 
 section h2 {
@@ -173,26 +180,29 @@ section h2 i {
     gap: 25px;
 }
 
-.card {
+.card, .post-card, .item-card {
     background: rgba(26, 31, 40, 0.7);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 25px;
     backdrop-filter: blur(5px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
 }
 
-.card:hover {
+.card:hover, .post-card:hover, .item-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 0 20px var(--border-color);
 }
 
-.card h3 {
+.card h3, .post-card h3, .item-card h3 {
     color: var(--secondary-neon);
     margin-bottom: 10px;
 }
 
-.card p {
+.card p, .post-card p, .item-card p {
     font-family: Arial, Helvetica, sans-serif; /* Use a more readable font for content */
     line-height: 1.6;
     margin-bottom: 15px;
@@ -203,6 +213,8 @@ section h2 i {
     color: #aaa;
     border-top: 1px solid var(--border-color);
     padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .card-placeholder {
@@ -218,23 +230,6 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-/* --- Keyframe Animations --- */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
 /* --- Form Page Styles --- */
 .form-container-wrapper {
     display: flex;
@@ -305,6 +300,18 @@ footer {
     box-shadow: 0 0 15px var(--border-color);
 }
 
+.input-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(10, 12, 16, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif; /* A more standard font for long text */
+    font-size: 1em;
+    resize: vertical;
+}
+
 .form-btn {
     width: 100%;
     padding: 15px;
@@ -323,38 +330,55 @@ footer {
     text-decoration: none;
 }
 
-#form-message {
+#form-message, .form-message {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
 }
 
-/* Keyframe for simple fade-in */
+/* --- Keyframe Animations --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* --- Dashboard Page Styles --- */
-#dashboard {
+/* --- Account/Dashboard Page Styles --- */
+#account {
     padding-top: 120px;
 }
 
-.dashboard-header {
+.account-header {
     text-align: center;
     margin-bottom: 60px;
 }
 
-.dashboard-header h2 {
+.account-header h2 {
     font-size: 3em;
 }
 
-.dashboard-header p {
+.account-header p {
     font-size: 1.2em;
     color: #aaa;
 }
 
-.dashboard-actions {
+.account-actions {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -390,89 +414,9 @@ footer {
     margin-bottom: 10px;
     color: var(--primary-neon);
 }
-.input-group textarea {
-    width: 100%;
-    padding: 15px;
-    background-color: rgba(10, 12, 16, 0.8);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    color: var(--text-color);
-    font-family: Arial, Helvetica, sans-serif; /* A more standard font for long text */
-    font-size: 1em;
-    resize: vertical;
-}
-/* --- Page Header Styles (for forum/marketplace lists) --- */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-    gap: 20px;
-}
 
-.page-header h2 {
-    margin-bottom: 0; /* Override default margin */
-}
-
-/* --- Post Detail Page Styles --- */
-#post-detail {
-    padding-top: 120px;
-}
-.post-full-content {
-    background: rgba(10, 12, 16, 0.8);
-    padding: 40px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-}
-
-.post-full-content h1 {
-    font-size: 3em;
-    color: var(--primary-neon);
-    margin-bottom: 20px;
-}
-
-.post-meta {
-    color: #aaa;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.post-body {
-    font-family: Arial, sans-serif;
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: var(--text-color);
-}
-.item-price {
-    color: var(--primary-neon);
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.item-purchase-section {
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.item-price-large {
-    font-size: 2.5em;
-    color: var(--primary-neon);
-    font-weight: bold;
-}
-.btn.disabled {
-    background-color: #555;
-    color: #999;
-    cursor: not-allowed;
-    box-shadow: none;
-    animation: none;
-}
 /* --- Dashboard Transaction Styles --- */
-.dashboard-transactions {
+.account-transactions {
     margin-top: 80px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -500,6 +444,8 @@ footer {
     padding: 5px 10px;
     font-size: 0.8em;
 }
+
+
 /* --- New Nav Styles --- */
 .nav-avatar {
     width: 30px;
@@ -520,6 +466,7 @@ footer {
     align-items: center;
     gap: 8px;
 }
+
 /* --- Profile Page Styles --- */
 #profile-page {
     padding-top: 120px;
@@ -548,6 +495,52 @@ footer {
     color: #aaa;
     font-size: 1.1em;
 }
+
+/* --- Page Header Styles (for forum/marketplace lists) --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.page-header h2 {
+    margin-bottom: 0; /* Override default margin */
+}
+
+/* --- Post Detail Page Styles --- */
+#post-detail, #item-detail {
+    padding-top: 120px;
+}
+.post-full-content {
+    background: rgba(10, 12, 16, 0.8);
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.post-full-content h1 {
+    font-size: 3em;
+    color: var(--primary-neon);
+    margin-bottom: 20px;
+}
+
+.post-meta {
+    color: #aaa;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-body {
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
 a.user-link {
     color: var(--secondary-neon);
     font-weight: bold;
@@ -555,4 +548,24 @@ a.user-link {
 }
 a.user-link:hover {
     text-decoration: underline;
+}
+
+.item-price {
+    color: var(--primary-neon);
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.item-purchase-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-price-large {
+    font-size: 2.5em;
+    color: var(--primary-neon);
+    font-weight: bold;
 }

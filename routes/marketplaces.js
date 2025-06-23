@@ -1,27 +1,35 @@
 const router = require('express').Router();
 let MarketplaceItem = require('../models/marketplace.model');
 
-// Get all marketplace items
+// GET all items (with seller's username)
 router.route('/').get((req, res) => {
-  MarketplaceItem.find()
-    .then(items => res.json(items))
-    .catch(err => res.status(400).json('Error: ' + err));
+    MarketplaceItem.find()
+        .populate('seller', 'username') // Add seller's username
+        .sort({ createdAt: -1 })
+        .then(items => res.json(items))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// Add a new marketplace item
+// ADD a new item
 router.route('/add').post((req, res) => {
-  const { itemName, description, price, seller } = req.body;
+    const { itemName, description, price, seller } = req.body;
 
-  const newItem = new MarketplaceItem({
-    itemName,
-    description,
-    price,
-    seller,
-  });
+    if (!itemName || !description || !price || !seller) {
+        return res.status(400).json('Error: Please provide all required fields.');
+    }
 
-  newItem.save()
-    .then(() => res.json('Item added to the marketplace!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    const newItem = new MarketplaceItem({ itemName, description, price, seller });
+    newItem.save()
+        .then(() => res.json('Item listed successfully!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// GET a single item by ID
+router.route('/:id').get((req, res) => {
+    MarketplaceItem.findById(req.params.id)
+        .populate('seller', 'username')
+        .then(item => res.json(item))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;

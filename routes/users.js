@@ -1,10 +1,8 @@
-// routes/users.js
-
 const router = require('express').Router();
-const bcrypt = require('bcryptjs'); // Import bcrypt
+const bcrypt = require('bcryptjs');
 let User = require('../models/user.model');
 
-// --- User Registration with Password Hashing ---
+// --- User Registration ---
 router.route('/register').post(async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -15,14 +13,13 @@ router.route('/register').post(async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Generate a unique avatar URL for the new user
     const avatar = `https://placehold.co/150x150/00ffff/0a0c10?text=${username.charAt(0).toUpperCase()}`;
 
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
-      avatar, // Save the generated avatar URL
+      avatar,
     });
 
     await newUser.save();
@@ -32,8 +29,7 @@ router.route('/register').post(async (req, res) => {
   }
 });
 
-
-// --- UPDATE User Login ---
+// --- User Login ---
 router.route('/login').post(async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -46,21 +42,22 @@ router.route('/login').post(async (req, res) => {
       return res.status(400).json('Error: Invalid credentials.');
     }
 
-    // Send back more user info on login
     res.json({
         message: 'Login successful!',
         user: {
             id: user._id,
             username: user.username,
             email: user.email,
-            avatar: user.avatar, // <-- ADD THIS
-            gc_balance: user.gc_balance // <-- ADD THIS
+            avatar: user.avatar,
+            gc_balance: user.gc_balance
         }
     });
   } catch (err) {
     res.status(400).json('Error: ' + err);
   }
 });
+
+// --- Get User Public Profile ---
 router.route('/:username').get(async (req, res) => {
     try {
         const user = await User.findOne({ username: req.params.username })
@@ -74,6 +71,5 @@ router.route('/:username').get(async (req, res) => {
         res.status(400).json('Error: ' + err);
     }
 });
-
 
 module.exports = router;

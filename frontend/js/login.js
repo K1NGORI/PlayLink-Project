@@ -61,32 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-       try {
-    const response = await fetch(`${apiBaseUrl}/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    });
+        try {
+            const response = await fetch(`${apiBaseUrl}/users/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-    const data = await response.json();
+            const data = await response.json();
 
-    if (!response.ok) {
-        throw new Error(data.Error || 'Login failed');
-    }
+            if (!response.ok) {
+                throw new Error(data.Error || 'Login failed');
+            }
 
-    // ---- REPLACE THIS SECTION ---- //
-    // Old code just showed a message. New code saves to localStorage and redirects.
-    
-    // Save user data to localStorage
-    localStorage.setItem('playlinkUser', JSON.stringify(data.user));
+            // Save user data to localStorage
+            localStorage.setItem('playlinkUser', JSON.stringify(data.user));
 
-    // Redirect to the new dashboard page
-    window.location.href = 'dashboard.html';
-    // ----------------------------- //
+            // Redirect to the account page
+            window.location.href = 'account.html';
 
-} catch (error) {
-    formMessage.style.color = 'var(--secondary-neon)';
-    formMessage.textContent = error.message;
-}
+        } catch (error) {
+            formMessage.style.color = 'var(--secondary-neon)';
+            formMessage.textContent = error.message;
+        }
     });
 });

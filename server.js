@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -12,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-// Make sure you have MongoDB installed and running on your local machine
 mongoose.connect('mongodb://localhost:27017/playlink', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,11 +24,12 @@ connection.once('open', () => {
 app.get('/', (req, res) => {
   res.send('Welcome to the Playlink API!');
 });
-// server.js (add these lines)
 
+// API Routers
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const marketplaceRouter = require('./routes/marketplaces');
+const marketplaceRouter = require('./routes/marketplace');
+const transactionsRouter = require('./routes/transactions');
 
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);

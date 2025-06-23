@@ -1,4 +1,3 @@
-// Current models/marketplace.model.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,4 +17,5 @@ const marketplaceItemSchema = new Schema({
 });
 
 const MarketplaceItem = mongoose.model('MarketplaceItem', marketplaceItemSchema);
+
 module.exports = MarketplaceItem;
