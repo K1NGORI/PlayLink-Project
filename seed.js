@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const User = require('./backend/models/user.model');
-const Post = require('./backend/models/post.model');
-const MarketplaceItem = require('./backend/models/marketplace.model');
+const User = require('./models/user.model');
+const Post = require('./models/post.model');
+const MarketplaceItem = require('./models/marketplace.model');
 
 // --- CONFIGURATION ---
 const MONGO_URI = 'mongodb://localhost:27017/playlink';

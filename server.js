@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 // API Routers
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const marketplaceRouter = require('./routes/marketplace');
+const marketplaceRouter = require('./routes/marketplaces');
 const transactionsRouter = require('./routes/transactions');
 
 app.use('/users', usersRouter);
