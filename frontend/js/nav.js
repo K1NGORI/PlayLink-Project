@@ -12,7 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
         // User is logged in
         navHTML += `
-            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="nav-balance"><i class="fa-solid fa-coins"></i> ${user.gc_balance} GC</li>
+            <li><a href="account.html">My Account</a></li>
+            <li>
+                <a href="profile.html?user=${user.username}" class="nav-profile-link">
+                    <img src="${user.avatar}" alt="My Avatar" class="nav-avatar">
+                    <span>${user.username}</span>
+                </a>
+            </li>
             <li><a href="#" id="logout-btn" class="btn btn-secondary">Logout</a></li>
         `;
     } else {
@@ -25,12 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     navHTML += `</ul>`;
     navContainer.innerHTML = navHTML;
 
-    // Add event listener for the logout button if it exists
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Clear user data and redirect to homepage
             localStorage.removeItem('playlinkUser');
             window.location.href = 'index.html';
         });

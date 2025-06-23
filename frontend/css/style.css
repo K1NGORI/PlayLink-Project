@@ -464,3 +464,95 @@ footer {
     color: var(--primary-neon);
     font-weight: bold;
 }
+.btn.disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+    animation: none;
+}
+/* --- Dashboard Transaction Styles --- */
+.dashboard-transactions {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+.transaction-list h3 {
+    color: var(--primary-neon);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.transaction-list ul {
+    list-style: none;
+}
+.transaction-list li {
+    background-color: rgba(26, 31, 40, 0.7);
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+/* --- New Nav Styles --- */
+.nav-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-neon);
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.nav-profile-link {
+    display: flex;
+    align-items: center;
+}
+.nav-balance {
+    color: var(--primary-neon);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* --- Profile Page Styles --- */
+#profile-page {
+    padding-top: 120px;
+}
+.profile-header {
+    background: rgba(10, 12, 16, 0.8);
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.profile-avatar-large {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--primary-neon);
+}
+.profile-info h1 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.profile-info p {
+    color: #aaa;
+    font-size: 1.1em;
+}
+a.user-link {
+    color: var(--secondary-neon);
+    font-weight: bold;
+    text-decoration: none;
+}
+a.user-link:hover {
+    text-decoration: underline;
+}

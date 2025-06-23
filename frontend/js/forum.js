@@ -18,13 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 postCard.href = `post.html?id=${post._id}`; // Link to detail page
                 postCard.className = 'card post-card';
                 
-                postCard.innerHTML = `
-                    <h3>${post.title}</h3>
-                    <div class="card-footer">
-                        <span>By: ${post.author ? post.author.username : 'Unknown'}</span>
-                        <span>Posted on: ${new Date(post.createdAt).toLocaleDateString()}</span>
-                    </div>
-                `;
+      const authorUsername = post.author ? post.author.username : 'Unknown';
+    postCard.innerHTML = `
+        <h3>${post.title}</h3>
+        <div class="card-footer">
+            <span>By: <a href="profile.html?user=${authorUsername}" class="user-link">${authorUsername}</a></span>
+            <span>Posted on: ${new Date(post.createdAt).toLocaleDateString()}</span>
+        </div>
+    `;
                 postsContainer.appendChild(postCard);
             });
 

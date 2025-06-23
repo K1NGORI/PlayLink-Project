@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const itemCard = document.createElement('a');
                 itemCard.href = `item.html?id=${item._id}`;
                 itemCard.className = 'card item-card';
+                const authorUsername = post.author ? post.author.username : 'Unknown';
                 itemCard.innerHTML = `
                     <h3>${item.itemName}</h3>
                     <p class="item-price">${item.price} GC</p>

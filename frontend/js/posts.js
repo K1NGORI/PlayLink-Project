@@ -23,17 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.title = `${post.title} - Playlink`; // Update the page title
 
-            postDetailContainer.innerHTML = `
-                <div class="post-full-content">
-                    <h1>${post.title}</h1>
-                    <div class="post-meta">
-                        By ${post.author ? post.author.username : 'Unknown'} on ${new Date(post.createdAt).toLocaleDateString()}
-                    </div>
-                    <div class="post-body">
-                        ${post.content.replace(/\n/g, '<br>')}
-                    </div>
-                </div>
-            `;
+            const authorUsername = post.author ? post.author.username : 'Unknown';
+postDetailContainer.innerHTML = `
+    <div class="post-full-content">
+        <h1>${post.title}</h1>
+        <div class="post-meta">
+            By <a href="profile.html?user=${authorUsername}" class="user-link">${authorUsername}</a> on ${new Date(post.createdAt).toLocaleDateString()}
+        </div>
+        // ...
+    </div>
+`;
         } catch (error) {
             postDetailContainer.innerHTML = '<h2>Error loading post.</h2>';
             console.error('Error fetching post:', error);
