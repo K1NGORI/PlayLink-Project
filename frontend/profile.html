@@ -13,12 +13,24 @@
         <nav class="container" id="main-nav"></nav>
     </header>
 
-    <main>
-        <section id="profile-page" class="container">
-            <!-- Profile content will be loaded here by profile.js -->
-            <div class="card-placeholder">Loading Profile...</div>
-        </section>
-    </main>
+<main>
+    <section id="profile-page" class="container">
+        <div class="profile-grid">
+            <div id="profile-card-container" class="profile-left">
+                </div>
+            <div class="profile-right">
+                <div id="profile-posts-container" class="profile-content-panel">
+                    <h3>Posts by this User</h3>
+                    <ul id="profile-posts-list"></ul>
+                </div>
+                <div id="profile-items-container" class="profile-content-panel">
+                    <h3>Items for Sale</h3>
+                    <ul id="profile-items-list"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
     <script src="js/nav.js"></script>
     <script src="js/profile.js"></script>
