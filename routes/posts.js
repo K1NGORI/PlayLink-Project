@@ -32,5 +32,11 @@ router.route('/:id').get((req, res) => {
     .then(post => res.json(post))
     .catch(err => res.status(400).json('Error: ' + err));
 });
-
+// GET all posts by a specific user ID
+router.route('/user/:userId').get((req, res) => {
+    Post.find({ author: req.params.userId })
+      .sort({ createdAt: -1 })
+      .then(posts => res.json(posts))
+      .catch(err => res.status(400).json('Error: ' + err));
+});
 module.exports = router;
