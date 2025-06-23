@@ -1,35 +1,21 @@
-const router = require('express').Router();
-let MarketplaceItem = require('../models/marketplace.model');
+// Current models/marketplace.model.js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// GET all items (with seller's username)
-router.route('/').get((req, res) => {
-    MarketplaceItem.find()
-        .populate('seller', 'username') // Add seller's username
-        .sort({ createdAt: -1 })
-        .then(items => res.json(items))
-        .catch(err => res.status(400).json('Error: ' + err));
+const marketplaceItemSchema = new Schema({
+  itemName: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+  seller: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  status: {
+    type: String,
+    required: true,
+    enum: ['available', 'in_escrow', 'sold'],
+    default: 'available'
+  }
+}, {
+  timestamps: true,
 });
 
-// ADD a new item (This is a MODIFIED route)
-router.route('/add').post((req, res) => {
-    const { itemName, description, price, seller } = req.body;
-
-    if (!itemName || !description || !price || !seller) {
-        return res.status(400).json('Error: Please provide all required fields.');
-    }
-
-    const newItem = new MarketplaceItem({ itemName, description, price, seller });
-    newItem.save()
-        .then(() => res.json('Item listed successfully!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-// GET a single item by ID (NEW ROUTE)
-router.route('/:id').get((req, res) => {
-    MarketplaceItem.findById(req.params.id)
-        .populate('seller', 'username')
-        .then(item => res.json(item))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-module.exports = router;
+const MarketplaceItem = mongoose.model('MarketplaceItem', marketplaceItemSchema);
+module.exports = MarketplaceItem;

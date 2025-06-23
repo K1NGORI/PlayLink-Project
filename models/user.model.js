@@ -20,7 +20,14 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
   },
-}, {
+   // ADD THIS NEW FIELD
+  gc_balance: {
+    type: Number,
+    required: true,
+    default: 1000 // Give every new user 1000 GC to start
+  }
+},
+ {
   timestamps: true,
 });
 
