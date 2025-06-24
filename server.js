@@ -33,7 +33,7 @@ const transactionsRouter = require('./routes/transactions');
 
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
-app.use('/marketplace', marketplaceRouter);
+app.use('/marketplaces', marketplaceRouter);
 app.use('/transactions', transactionsRouter);
 
 app.listen(port, () => {
