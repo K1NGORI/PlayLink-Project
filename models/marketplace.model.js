@@ -12,7 +12,6 @@ const marketplaceItemSchema = new Schema({
     enum: ['available', 'in_escrow', 'sold'],
     default: 'available'
   },
-  // ADD THIS NEW FIELD
   imageUrl: {
       type: String,
       default: 'https://placehold.co/600x400/1a1f28/00ffff?text=Playlink'
