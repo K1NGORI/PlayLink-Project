@@ -47,12 +47,30 @@ const seedData = async () => {
         console.log(`${posts.length} posts created.`);
 
         // --- Create Marketplace Items ---
-        const items = [
-            { itemName: 'Legendary Sword Skin', description: 'A rare, glowing sword skin for the game "BladeMasters". One of a kind.', price: 500, seller: users[0]._id },
-            { itemName: 'Armored Mount', description: 'A fully-armored rhino mount. Fast and intimidating.', price: 350, seller: users[1]._id },
-            { itemName: 'XP Boost (24 Hours)', description: 'Double your experience points for 24 hours. Great for leveling up fast.', price: 100, seller: users[0]._id },
-        ];
-        await MarketplaceItem.insertMany(items);
+const items = [
+    { 
+        itemName: 'Legendary Sword Skin', 
+        description: 'A rare, glowing sword skin for the game "BladeMasters". One of a kind.', 
+        price: 500, 
+        seller: users[0]._id,
+        imageUrl: 'https://placehold.co/600x400/1a1f28/ff00ff?text=Sword+Skin'
+    },
+    { 
+        itemName: 'Armored Mount', 
+        description: 'A fully-armored rhino mount. Fast and intimidating.', 
+        price: 350, 
+        seller: users[1]._id,
+        imageUrl: 'https://placehold.co/600x400/1a1f28/ff00ff?text=Armored+Mount'
+    },
+    { 
+        itemName: 'XP Boost (24 Hours)', 
+        description: 'Double your experience points for 24 hours. Great for leveling up fast.', 
+        price: 100, 
+        seller: users[0]._id,
+        imageUrl: 'https://placehold.co/600x400/1a1f28/ff00ff?text=XP+Boost'
+    },
+];
+await MarketplaceItem.insertMany(items);
         console.log(`${items.length} marketplace items created.`);
 
         console.log('Database seeding completed successfully!');

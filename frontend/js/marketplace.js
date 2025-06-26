@@ -13,13 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemCard.href = `item.html?id=${item._id}`;
                 itemCard.className = 'card item-card';
                 const authorUsername = post.author ? post.author.username : 'Unknown';
-                itemCard.innerHTML = `
-                    <h3>${item.itemName}</h3>
-                    <p class="item-price">${item.price} GC</p>
-                    <div class="card-footer">
-                        <span>By: ${item.seller ? item.seller.username : 'Unknown'}</span>
-                    </div>
-                `;
+itemCard.innerHTML = `
+    <div class="card-image-container">
+        <img src="${item.imageUrl}" alt="${item.itemName}" class="card-image">
+    </div>
+    <div class="card-content">
+        <h3>${item.itemName}</h3>
+        <p class="item-price">${item.price} GC</p>
+        <div class="card-footer">
+            <span>By: <a href="profile.html?user=${sellerUsername}" class="user-link" onclick="event.stopPropagation()">${sellerUsername}</a></span>
+            <span><span class="status-${item.status}">${item.status}</span></span>
+        </div>
+    </div>
+`;
                 itemsContainer.appendChild(itemCard);
             });
         } catch (error) {
