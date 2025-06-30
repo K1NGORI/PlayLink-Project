@@ -12,13 +12,19 @@ router.route('/').get((req, res) => {
 
 // ADD a new item
 router.route('/add').post((req, res) => {
-    const { itemName, description, price, seller } = req.body;
+    const { itemName, description, price, seller, imageUrl } = req.body;
 
     if (!itemName || !description || !price || !seller) {
         return res.status(400).json('Error: Please provide all required fields.');
     }
 
-    const newItem = new MarketplaceItem({ itemName, description, price, seller });
+    const newItem = new MarketplaceItem({ 
+        itemName, 
+        description, 
+        price, 
+        seller,
+        imageUrl: imageUrl || 'https://placehold.co/600x400/1a1f28/00ffff?text=Playlink' // Add a fallback
+    });
     newItem.save()
         .then(() => res.json('Item listed successfully!'))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -31,6 +37,7 @@ router.route('/:id').get((req, res) => {
         .then(item => res.json(item))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
 // GET all items by a specific seller ID
 router.route('/user/:userId').get((req, res) => {
     MarketplaceItem.find({ seller: req.params.userId })
@@ -39,4 +46,4 @@ router.route('/user/:userId').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 });
 
-module.exports = router;;
+module.exports = router;
