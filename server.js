@@ -10,10 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/playlink', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://localhost:27017/playlink');
 
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -28,12 +25,12 @@ app.get('/', (req, res) => {
 // API Routers
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const marketplaceRouter = require('./routes/marketplaces');
+const marketplaceRouter = require('./routes/marketplace'); // This line was missing or misplaced
 const transactionsRouter = require('./routes/transactions');
 
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
-app.use('/marketplaces', marketplaceRouter);
+app.use('/marketplace', marketplaceRouter); // Now this line will work
 app.use('/transactions', transactionsRouter);
 
 app.listen(port, () => {
