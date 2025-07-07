@@ -474,3 +474,15 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border
         font-size: 3em;
     }
 }
+/* --- Item Detail Image Style --- */
+.item-detail-image-container {
+    width: 100%;
+    max-height: 400px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.item-detail-image-container img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+}

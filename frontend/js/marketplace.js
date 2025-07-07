@@ -18,15 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             items.forEach(item => {
-                // CHANGED: The entire card is now an <a> tag, making it fully clickable.
-                const itemCard = document.createElement('a');
-                itemCard.href = `item.html?id=${item._id}`; // The link for the entire card
-                itemCard.className = 'card item-card';
+                // The entire card is now a single <a> tag, making it fully clickable.
+                const itemCardLink = document.createElement('a');
+                itemCardLink.href = `item.html?id=${item._id}`; // This is the destination link
+                itemCardLink.className = 'card item-card';
 
                 const sellerUsername = item.seller ? item.seller.username : 'Unknown';
                 
-                // The inner links are removed as the whole card is now the link.
-                itemCard.innerHTML = `
+                itemCardLink.innerHTML = `
                     <div class="card-image-container">
                         <img src="${item.imageUrl}" alt="${item.itemName}" class="card-image">
                     </div>
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-                itemsContainer.appendChild(itemCard);
+                itemsContainer.appendChild(itemCardLink);
             });
 
         } catch (error) {
