@@ -18,22 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             items.forEach(item => {
-                const itemCard = document.createElement('div');
+                // CHANGED: The entire card is now an <a> tag, making it fully clickable.
+                const itemCard = document.createElement('a');
+                itemCard.href = `item.html?id=${item._id}`; // The link for the entire card
                 itemCard.className = 'card item-card';
 
                 const sellerUsername = item.seller ? item.seller.username : 'Unknown';
                 
+                // The inner links are removed as the whole card is now the link.
                 itemCard.innerHTML = `
-                    <a href="item.html?id=${item._id}" class="card-image-link">
-                        <div class="card-image-container">
-                            <img src="${item.imageUrl}" alt="${item.itemName}" class="card-image">
-                        </div>
-                    </a>
+                    <div class="card-image-container">
+                        <img src="${item.imageUrl}" alt="${item.itemName}" class="card-image">
+                    </div>
                     <div class="card-content">
-                        <h3><a href="item.html?id=${item._id}">${item.itemName}</a></h3>
+                        <h3>${item.itemName}</h3>
                         <p class="item-price">${item.price} GC</p>
                         <div class="card-footer">
-                            <span>By: <a href="profile.html?user=${sellerUsername}" class="user-link">${sellerUsername}</a></span>
+                            <span>By: <span class="user-link">${sellerUsername}</span></span>
                             <span><span class="status-${item.status.replace('_', '-')}">${item.status.replace('_', ' ')}</span></span>
                         </div>
                     </div>

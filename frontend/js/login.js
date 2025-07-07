@@ -31,25 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            // (Registration logic is likely fine, no changes needed here)
             const username = document.getElementById('register-username').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
-
             try {
                 const response = await fetch(`${apiBaseUrl}/users/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
                 });
-                
                 const data = await response.json();
                 if (!response.ok) throw new Error(data);
-
                 formMessage.style.color = 'var(--primary-neon)';
                 formMessage.textContent = 'Registration successful! Please login.';
                 registerForm.reset();
-                showLoginLink.click(); 
-
+                showLoginLink.click();
             } catch (error) {
                 formMessage.style.color = 'var(--secondary-neon)';
                 formMessage.textContent = error.message;
@@ -65,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('login-password').value;
 
             try {
+                console.log('Attempting to log in...'); // DEBUG
                 const response = await fetch(`${apiBaseUrl}/users/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -72,15 +70,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const data = await response.json();
-                if (!response.ok) throw new Error(data.Error || 'Login failed');
+                if (!response.ok) {
+                    throw new Error(data.Error || 'Login failed');
+                }
+
+                console.log('Login successful! User data received:', data.user); // DEBUG
 
                 // THIS IS THE CRITICAL PART: Save user data to browser's localStorage
                 localStorage.setItem('playlinkUser', JSON.stringify(data.user));
+                console.log('User data saved to localStorage.'); // DEBUG
 
                 // Redirect to the account page after successful login
+                console.log('Redirecting to account.html...'); // DEBUG
                 window.location.href = 'account.html';
 
             } catch (error) {
+                console.error('Login failed:', error); // DEBUG
                 formMessage.style.color = 'var(--secondary-neon)';
                 formMessage.textContent = error.message;
             }
