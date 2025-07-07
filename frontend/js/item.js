@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiBaseUrl = 'http://localhost:5000';
     const itemDetailContainer = document.getElementById('item-detail');
     
-    // Get the post ID from the URL query parameter
+    // Get the item ID from the URL query parameter
     const params = new URLSearchParams(window.location.search);
     const itemId = params.get('id');
     const user = JSON.parse(localStorage.getItem('playlinkUser'));
@@ -21,13 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = `${item.itemName} - Playlink`;
 
             let purchaseSectionHTML = '';
-            // Determine which button to show
+            // Determine which button to show based on the item's status
             if (item.status === 'available') {
                 if (user && user.id === item.seller._id) {
-                    // Show a disabled button if the user is the seller
-                    purchaseSectionHTML = `<a href="#" class="btn btn-secondary disabled">You own this item</a>`;
+                    purchaseSectionHTML = `<button class="btn btn-secondary disabled">You own this item</button>`;
                 } else {
-                    // Show the purchase button for other users
                     purchaseSectionHTML = `<button id="purchase-btn" class="btn btn-primary">Purchase Item</button>`;
                 }
             } else if (item.status === 'in_escrow') {
@@ -57,9 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             // Add the event listener ONLY if the purchase button exists
-            if (item.status === 'available' && (!user || user.id !== item.seller._id)) {
-                const purchaseBtn = document.getElementById('purchase-btn');
-                purchaseBtn.addEventListener('click', handlePurchase);
+            if (document.getElementById('purchase-btn')) {
+                document.getElementById('purchase-btn').addEventListener('click', handlePurchase);
             }
 
         } catch (error) {
@@ -89,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.Error || 'Transaction failed');
 
-                // Reload the page to show the updated item status and user balance
+                alert('Purchase successful! The item is now in escrow. You can confirm receipt on your account page.');
                 window.location.reload();
 
             } catch (error) {

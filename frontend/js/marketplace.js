@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const apiBaseUrl = 'http://localhost:5000';
     const itemsContainer = document.getElementById('items-container');
@@ -18,13 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             items.forEach(item => {
-                // The entire card is now a single <a> tag, making it fully clickable.
+                // This creates the main clickable link for the entire card.
                 const itemCardLink = document.createElement('a');
-                itemCardLink.href = `item.html?id=${item._id}`; // This is the destination link
+                itemCardLink.href = `item.html?id=${item._id}`; // This is the destination link.
                 itemCardLink.className = 'card item-card';
 
                 const sellerUsername = item.seller ? item.seller.username : 'Unknown';
                 
+                // The HTML content for the card.
                 itemCardLink.innerHTML = `
                     <div class="card-image-container">
                         <img src="${item.imageUrl}" alt="${item.itemName}" class="card-image">
