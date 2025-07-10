@@ -1,6 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
+// This function will build the navigation bar. We can call it anytime we need to update the UI.
+function renderNavbar() {
     const user = JSON.parse(localStorage.getItem('playlinkUser'));
     const navContainer = document.getElementById('main-nav');
+
+    if (!navContainer) return; // Exit if the nav element doesn't exist on the page
 
     let navHTML = `
         <a href="index.html" class="logo">PLAYLINK</a>
@@ -32,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navHTML += `</ul>`;
     navContainer.innerHTML = navHTML;
 
+    // Re-add the event listener for the logout button if it exists
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
@@ -40,4 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
-});
+}
+
+// Run the function once when the page initially loads.
+document.addEventListener('DOMContentLoaded', renderNavbar);

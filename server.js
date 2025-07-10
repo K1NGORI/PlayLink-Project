@@ -27,11 +27,13 @@ const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const marketplaceRouter = require('./routes/marketplace'); // This line was missing or misplaced
 const transactionsRouter = require('./routes/transactions');
+const tradesRouter = require('./routes/trades');
 
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/marketplace', marketplaceRouter); // Now this line will work
 app.use('/transactions', transactionsRouter);
+app.use('/trades', tradesRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

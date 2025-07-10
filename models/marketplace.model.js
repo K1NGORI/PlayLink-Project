@@ -15,6 +15,15 @@ const marketplaceItemSchema = new Schema({
   imageUrl: {
       type: String,
       default: 'https://placehold.co/600x400/1a1f28/00ffff?text=Playlink'
+  },
+  // --- NEW FIELDS FOR TRADING ---
+  isTradeable: {
+      type: Boolean,
+      default: true // Allow trading by default
+  },
+  desiredTrade: {
+      type: String, // A text description of what the user wants in trade
+      trim: true
   }
 }, {
   timestamps: true,
