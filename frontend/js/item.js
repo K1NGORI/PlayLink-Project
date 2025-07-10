@@ -14,27 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentItem = null;
 
     const renderPage = (item) => {
-        currentItem = item;
-        document.title = `${item.itemName} - Playlink`;
+    currentItem = item;
+    document.title = `${item.itemName} - Playlink`;
+    let purchaseSectionHTML = '';
+    let tradeSectionHTML = '';
 
-        let purchaseSectionHTML = '';
-        let tradeSectionHTML = ''; // New section for the trade button
-
-        if (item.status === 'available') {
-            if (user && user.id === item.seller._id) {
-                purchaseSectionHTML = `<button class="btn btn-secondary disabled">You own this item</button>`;
-            } else {
-                purchaseSectionHTML = `<button id="purchase-btn" class="btn btn-primary">Purchase Item</button>`;
-                // Show trade button if the item is tradeable
-                if (item.isTradeable) {
-                    tradeSectionHTML = `<button id="trade-btn" class="btn btn-secondary">Make Trade Offer</button>`;
-                }
-            }
-        } else if (item.status === 'in_escrow') {
-            purchaseSectionHTML = `<button class="btn btn-secondary disabled">Sale Pending</button>`;
+    if (item.status === 'available') {
+        if (user && user.id === item.seller._id) {
+            purchaseSectionHTML = `<button class="btn btn-secondary disabled">You own this item</button>`;
         } else {
-            purchaseSectionHTML = `<button class="btn btn-secondary disabled">Sold</button>`;
+            purchaseSectionHTML = `<button id="purchase-btn" class="btn btn-primary">Purchase Item</button>`;
+            if (item.isTradeable) {
+                // THIS IS THE CHANGED LINE
+                tradeSectionHTML = `<a href="make-offer.html?requesting=${item._id}" class="btn btn-secondary">Make Trade Offer</a>`;
+            }
         }
+    } else if (item.status === 'in_escrow') {
+        purchaseSectionHTML = `<button class="btn btn-secondary disabled">Sale Pending</button>`;
+    } else {
+        purchaseSectionHTML = `<button class="btn btn-secondary disabled">Sold</button>`;
+    }
 
         itemDetailContainer.innerHTML = `
             <div class="post-full-content">
